@@ -123,8 +123,16 @@ function startTimer() {
 }
 
 function countDown() {
-  currentCard.time--;
-  timer.textContent = currentCard.time + " min";
+  let minutes = Math.floor(currentCard.time / 60); // Calculate minutes
+  let seconds = currentCard.time % 60; // Calculate remaining seconds
+
+  // Format the time display
+  let timeDisplay =
+    minutes.toString().padStart(2, "0") +
+    ":" +
+    seconds.toString().padStart(2, "0");
+
+  timer.textContent = timeDisplay;
 
   if (currentCard.time <= 0) {
     clearInterval(timerInterval);
@@ -153,6 +161,9 @@ function countDown() {
     // Move to the next card
     currentCardIndex++;
   }
+
+  // Decrement the time by 1 minute
+  currentCard.time -= 60;
 }
 
 deck.addEventListener("click", flipCard);
