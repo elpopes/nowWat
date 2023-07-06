@@ -25,6 +25,7 @@ let timer = document.getElementById("timer");
 let currentCardIndex = 0;
 let currentCard;
 let timerInterval;
+let isTimerStarted = false;
 
 function flipCard() {
   if (currentCardIndex >= cards.length) {
@@ -36,12 +37,13 @@ function flipCard() {
   deck.innerHTML = currentCard.task + "<br/>" + currentCard.time + " min";
   deck.classList.add("flipped");
   startButton.style.backgroundColor = "green";
-
-  startTimer();
 }
 
 function startTimer() {
-  timerInterval = setInterval(countDown, 1000);
+  if (!isTimerStarted) {
+    isTimerStarted = true;
+    timerInterval = setInterval(countDown, 1000);
+  }
   startButton.removeEventListener("click", startTimer);
 }
 
@@ -63,30 +65,33 @@ function countDown() {
     deck.classList.remove("flipped");
     startButton.addEventListener("click", startTimer);
 
-    if (currentCard.star) {
-      let answer = confirm("Did you do your best?");
-      if (answer) {
-        // User did their best, award a star
-        alert("Congratulations! You earned a star!");
-      } else {
-        // User did not do their best
-        let tryAgain = confirm(
-          "Always try your best! Would you like to try again?"
-        );
-        if (tryAgain) {
-          // Restart the game
-          currentCardIndex = 0;
-          flipCard();
+    setTimeout(function () {
+      if (currentCard.star) {
+        let answer = confirm("Did you do your best?\n\nYes or No");
+        if (answer) {
+          // User did their best, award a star
+          alert("Congratulations! You earned a star!");
+        } else {
+          // User did not do their best
+          let tryAgain = confirm(
+            "Always try your best! Would you like to try again?"
+          );
+          if (tryAgain) {
+            // Restart the game
+            currentCardIndex = 0;
+            flipCard();
+          }
         }
       }
-    }
 
-    // Move to the next card
-    currentCardIndex++;
+      // Move to the next card
+      currentCardIndex++;
+      flipCard();
+    }, 1000); // Wait for 1 second before showing the message and moving to the next card
   }
 
-  // Decrement the time by 1 minute
-  currentCard.time -= 60;
+  // Decrement the time by 1 second
+  currentCard.time--;
 }
 
 deck.addEventListener("click", flipCard);
