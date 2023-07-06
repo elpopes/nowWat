@@ -26,6 +26,12 @@ let currentCardIndex = 0;
 let currentCard;
 let timerInterval;
 let isTimerStarted = false;
+let startTime;
+
+let yesNoModal = document.getElementById("yesNoModal");
+let yesButton = document.getElementById("yesButton");
+let noButton = document.getElementById("noButton");
+let modalText = document.getElementById("modalText");
 
 function flipCard() {
   if (currentCardIndex >= cards.length) {
@@ -37,6 +43,8 @@ function flipCard() {
   deck.innerHTML = currentCard.task + "<br/>" + currentCard.time + " min";
   deck.classList.add("flipped");
   startButton.style.backgroundColor = "green";
+
+  startTime = currentCard.time * 60;
 }
 
 function startTimer() {
@@ -48,10 +56,9 @@ function startTimer() {
 }
 
 function countDown() {
-  let minutes = Math.floor(currentCard.time / 60); // Calculate minutes
-  let seconds = currentCard.time % 60; // Calculate remaining seconds
+  let minutes = Math.floor(startTime / 60);
+  let seconds = startTime % 60;
 
-  // Format the time display
   let timeDisplay =
     minutes.toString().padStart(2, "0") +
     ":" +
@@ -59,7 +66,7 @@ function countDown() {
 
   timer.textContent = timeDisplay;
 
-  if (currentCard.time <= 0) {
+  if (startTime <= 0) {
     clearInterval(timerInterval);
     timer.textContent = "Time's up!";
     deck.classList.remove("flipped");
@@ -67,33 +74,51 @@ function countDown() {
 
     setTimeout(function () {
       if (currentCard.star) {
-        let answer = confirm("Did you do your best?\n\nYes or No");
-        if (answer) {
-          // User did their best, award a star
-          alert("Congratulations! You earned a star!");
-        } else {
-          // User did not do their best
-          let tryAgain = confirm(
-            "Always try your best! Would you like to try again?"
-          );
-          if (tryAgain) {
-            // Restart the game
-            currentCardIndex = 0;
+        showYesNoDialog(
+          "Did you do your best?",
+          function () {
+            alert("Congratulations! You earned a star!");
+            currentCardIndex++;
             flipCard();
+          },
+          function () {
+            showYesNoDialog(
+              "Always try your best! Would you like to try again?",
+              function () {
+                currentCardIndex = 0;
+                flipCard();
+              },
+              function () {
+                currentCardIndex++;
+                flipCard();
+              }
+            );
           }
-        }
+        );
+      } else {
+        currentCardIndex++;
+        flipCard();
       }
+    }, 1000);
 
-      // Move to the next card
-      currentCardIndex++;
-      flipCard();
-    }, 1000); // Wait for 1 second before showing the message and moving to the next card
+    startTime = currentCard.time * 60;
   }
 
-  // Decrement the time by 1 second
-  currentCard.time--;
+  startTime--;
+}
+
+function showYesNoDialog(text, yesCallback, noCallback) {
+  modalText.textContent = text;
+  yesButton.onclick = function () {
+    yesNoModal.style.display = "none";
+    yesCallback();
+  };
+  noButton.onclick = function () {
+    yesNoModal.style.display = "none";
+    noCallback();
+  };
+  yesNoModal.style.display = "block";
 }
 
 deck.addEventListener("click", flipCard);
-
 startButton.addEventListener("click", startTimer);
