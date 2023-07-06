@@ -95,6 +95,8 @@ function flipCard() {
   deck.innerHTML = currentCard.task + "<br/>" + currentCard.time + " min";
   deck.classList.add("flipped");
   startButton.style.backgroundColor = "green";
+
+  startTimer();
 }
 
 function startTimer() {
@@ -115,18 +117,22 @@ function countDown() {
     if (currentCard.star) {
       let answer = confirm("Did you do your best?");
       if (answer) {
+        // User did their best, award a star
         alert("Congratulations! You earned a star!");
       } else {
+        // User did not do their best
         let tryAgain = confirm(
           "Always try your best! Would you like to try again?"
         );
         if (tryAgain) {
+          // Restart the game
           currentCardIndex = 0;
           flipCard();
         }
       }
     }
 
+    // Move to the next card
     currentCardIndex++;
   }
 }
