@@ -19,8 +19,11 @@ function shuffle(array) {
 shuffle(cards);
 
 let deck = document.getElementById("deck");
+let faceUpCard = document.getElementById("faceUpCard");
 let startButton = document.getElementById("startButton");
 let timer = document.getElementById("timer");
+let instructions = document.getElementById("instructions");
+let stars = document.querySelectorAll(".emptyStar");
 
 let currentCardIndex = 0;
 let currentCard;
@@ -40,9 +43,13 @@ function flipCard() {
   }
 
   currentCard = cards[currentCardIndex];
-  deck.innerHTML = currentCard.task + "<br/>" + currentCard.time + " min";
-  deck.classList.add("flipped");
+  faceUpCard.innerHTML = currentCard.task;
+  faceUpCard.setAttribute("data-minutes", currentCard.time);
+  deck.style.display = "none";
+  faceUpCard.style.display = "block";
+  startButton.style.display = "block";
   startButton.style.backgroundColor = "green";
+  instructions.textContent = "Click Start to begin the task.";
 
   startTime = currentCard.time * 60;
 }
@@ -52,7 +59,7 @@ function startTimer() {
     isTimerStarted = true;
     timerInterval = setInterval(countDown, 1000);
   }
-  startButton.removeEventListener("click", startTimer);
+  startButton.style.display = "none";
 }
 
 function countDown() {
@@ -69,8 +76,7 @@ function countDown() {
   if (startTime <= 0) {
     clearInterval(timerInterval);
     timer.textContent = "Time's up!";
-    deck.classList.remove("flipped");
-    startButton.addEventListener("click", startTimer);
+    yesNoModal.style.display = "block";
 
     setTimeout(function () {
       if (currentCard.star) {
@@ -78,6 +84,8 @@ function countDown() {
           "Did you do your best?",
           function () {
             alert("Congratulations! You earned a star!");
+            stars[currentCardIndex].classList.remove("emptyStar");
+            stars[currentCardIndex].classList.add("fullStar");
             currentCardIndex++;
             flipCard();
           },
