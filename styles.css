@@ -57,7 +57,6 @@ h1 {
 }
 
 .front {
-  transform: rotateY(180deg);
   background-color: #fff;
 }
 
