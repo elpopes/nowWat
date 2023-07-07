@@ -20,6 +20,7 @@ shuffle(cards);
 
 let deck = document.getElementById("deck");
 let faceUpCard = document.getElementById("faceUpCard");
+let discardPile = document.getElementById("discardPile");
 let startButton = document.getElementById("startButton");
 let timer = document.getElementById("timer");
 let instructions = document.getElementById("instructions");
@@ -43,6 +44,10 @@ function flipCard() {
   }
 
   currentCard = cards[currentCardIndex];
+  discardPile.querySelector(".front").innerHTML = currentCard.task;
+  discardPile
+    .querySelector(".front")
+    .setAttribute("data-minutes", currentCard.time);
   faceUpCard.innerHTML = currentCard.task;
   faceUpCard.setAttribute("data-minutes", currentCard.time);
   deck.style.display = "none";
@@ -51,7 +56,7 @@ function flipCard() {
   startButton.style.backgroundColor = "green";
   instructions.textContent = "Click Start to begin the task.";
 
-  deck.classList.toggle("flipped");
+  discardPile.classList.toggle("flipped");
 
   startTime = currentCard.time * 60;
 }
