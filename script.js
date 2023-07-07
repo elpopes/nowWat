@@ -51,6 +51,8 @@ function flipCard() {
   startButton.style.backgroundColor = "green";
   instructions.textContent = "Click Start to begin the task.";
 
+  deck.classList.toggle("flipped");
+
   startTime = currentCard.time * 60;
 }
 
