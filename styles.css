@@ -9,13 +9,30 @@ body {
   padding: 2em;
 }
 
+#gamePlayArea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#playArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 h1 {
   font-size: 3em;
   font-weight: bold;
 }
 
 #starContainer {
-  font-size: 2em;
+  font-size: 6em; /* the size of the stars */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 0.5em; /* the space between the stars and the deck */
 }
 
 .emptyStar {
@@ -43,6 +60,7 @@ h1 {
   position: relative;
   cursor: pointer;
   perspective: 1000px;
+  border-radius: 10px;
 }
 
 .face {
@@ -57,7 +75,8 @@ h1 {
 }
 
 .front {
-  background-color: #fff;
+  background-color: #ffffff;
+  font-size: larger;
 }
 
 .back {
@@ -82,6 +101,7 @@ button.active {
 }
 
 #startButton {
+  margin-top: 1em;
   width: 100px;
   height: 40px;
   background-color: #ddd;

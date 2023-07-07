@@ -44,9 +44,8 @@ function flipCard() {
     .querySelector(".front")
     .setAttribute("data-minutes", currentCard.time);
 
-  deck.style.display = "none";
   startButton.style.display = "block";
-  startButton.style.backgroundColor = "green";
+  startButton.style.backgroundColor = "blue";
 
   instructions.textContent = "Click Start to begin the task.";
 
