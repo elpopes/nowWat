@@ -44,6 +44,12 @@ function flipCard() {
     .querySelector(".front")
     .setAttribute("data-minutes", currentCard.time);
 
+  // New code to update the timer displays
+  let timeDisplays = discardPile.querySelectorAll(".time");
+  timeDisplays.forEach(
+    (timeDisplay) => (timeDisplay.textContent = currentCard.time + " min")
+  );
+
   startButton.style.display = "block";
   startButton.style.backgroundColor = "blue";
 

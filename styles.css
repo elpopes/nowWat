@@ -144,3 +144,21 @@ button.active {
   color: white;
   cursor: pointer;
 }
+
+.time {
+  position: absolute;
+  padding: 5px;
+  background-color: rgba(0, 0, 0, 0.2); /* Semi-transparent background */
+  border-radius: 5px; /* Rounded corners */
+  font-weight: bold;
+}
+
+.top-left {
+  top: 0;
+  left: 0;
+}
+
+.bottom-right {
+  bottom: 0;
+  right: 0;
+}
