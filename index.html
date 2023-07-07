@@ -8,14 +8,19 @@
   <body>
     <div id="gameContainer">
       <h1>The NowWat!? Game</h1>
+      <div id="instructions">Flip a card and do what it says!</div>
       <div id="starContainer">
         <span class="emptyStar">☆</span>
         <span class="emptyStar">☆</span>
         <span class="emptyStar">☆</span>
       </div>
-      <div id="instructions">Flip a card and do what it says!</div>
       <div id="deckContainer">
-        <div id="deck"></div>
+        <div id="deck" class="card">
+          <div class="face front"></div>
+          <div class="face back">
+            <div class="question-mark">?</div>
+          </div>
+        </div>
         <div id="faceUpCard"></div>
       </div>
       <button id="startButton">Start</button>
