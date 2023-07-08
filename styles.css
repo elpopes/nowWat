@@ -78,10 +78,6 @@ h1 {
 .front {
   background-color: #ffffff;
   font-size: larger;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .back {
