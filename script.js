@@ -39,12 +39,11 @@ let modalText = document.getElementById("modalText");
 function flipCard() {
   currentCard = cards[currentCardIndex];
 
-  discardPile.querySelector(".front").innerHTML = currentCard.task;
+  discardPile.querySelector(".task").textContent = currentCard.task;
   discardPile
     .querySelector(".front")
     .setAttribute("data-minutes", currentCard.time);
 
-  // New code to update the timer displays
   let timeDisplays = discardPile.querySelectorAll(".time");
   timeDisplays.forEach(
     (timeDisplay) => (timeDisplay.textContent = currentCard.time + " min")

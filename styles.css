@@ -77,6 +77,10 @@ h1 {
 .front {
   background-color: #ffffff;
   font-size: larger;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .back {
@@ -145,11 +149,16 @@ button.active {
   cursor: pointer;
 }
 
+.task {
+  padding: 10px;
+  text-align: center;
+  overflow-wrap: break-word;
+}
+
 .time {
   position: absolute;
   padding: 5px;
-  background-color: rgba(0, 0, 0, 0.2); /* Semi-transparent background */
-  border-radius: 5px; /* Rounded corners */
+  border-radius: 5px;
   font-weight: bold;
 }
 
