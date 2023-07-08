@@ -46,7 +46,7 @@ function flipCard() {
 
   let timeDisplays = discardPile.querySelectorAll(".time");
   timeDisplays.forEach(
-    (timeDisplay) => (timeDisplay.textContent = currentCard.time + " min")
+    (timeDisplay) => (timeDisplay.textContent = currentCard.time)
   );
 
   startButton.style.display = "block";
