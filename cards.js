@@ -22,7 +22,7 @@ const cards = [
     star: true,
   },
   { task: "Do a meditation", time: 10, star: true },
-  { task: "Go outside and play", time: 20, star: true },
+  { task: "Water the plants on the stoop", time: 10, star: true },
   { task: "Help dad or mom wash the dishes", time: 15, star: true },
   { task: "Write a short story", time: 20, star: true },
   { task: "Make your bed", time: 10, star: true },
