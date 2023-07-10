@@ -21,6 +21,7 @@ shuffle(cards);
 let deck = document.getElementById("deck");
 let discardPile = document.getElementById("discardPile");
 let startButton = document.getElementById("startButton");
+let redrawButton = document.getElementById("redrawButton");
 let timer = document.getElementById("timer");
 let instructions = document.getElementById("instructions");
 let stars = document.querySelectorAll(".emptyStar");
@@ -59,6 +60,12 @@ function flipCard() {
     cardStar.appendChild(star);
   }
 
+  redrawButton.style.display = [...stars].some((star) =>
+    star.classList.contains("fullStar")
+  )
+    ? "block"
+    : "none";
+
   startButton.style.display = "block";
   startButton.style.backgroundColor = "blue";
 
@@ -67,6 +74,19 @@ function flipCard() {
   discardPile.classList.toggle("flipped");
 
   startTime = currentCard.time * 60;
+}
+
+function useStarToRedraw() {
+  let fullStars = [...stars].filter((star) =>
+    star.classList.contains("fullStar")
+  );
+
+  if (fullStars.length > 0) {
+    fullStars[0].classList.remove("fullStar");
+    fullStars[0].classList.add("emptyStar");
+    currentCardIndex = Math.floor(Math.random() * cards.length);
+    flipCard();
+  }
 }
 
 function startTimer() {
@@ -129,6 +149,8 @@ function countDown() {
 
   startTime--;
 }
+
+redrawButton.addEventListener("click", useStarToRedraw);
 
 function showYesNoDialog(text, yesCallback, noCallback) {
   modalText.textContent = text;
