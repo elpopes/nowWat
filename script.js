@@ -67,7 +67,6 @@ function flipCard() {
     : "none";
 
   startButton.style.display = "block";
-  startButton.style.backgroundColor = "blue";
 
   instructions.textContent = "Click Start to begin the task.";
 
