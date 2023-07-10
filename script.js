@@ -81,6 +81,7 @@ function useStarToRedraw() {
   );
 
   if (fullStars.length > 0) {
+    redrawButton.style.display = "inline-block";
     fullStars[0].classList.remove("fullStar");
     fullStars[0].classList.add("emptyStar");
     currentCardIndex = Math.floor(Math.random() * cards.length);
