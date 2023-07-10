@@ -26,6 +26,9 @@ let timer = document.getElementById("timer");
 let instructions = document.getElementById("instructions");
 let stars = document.querySelectorAll(".emptyStar");
 
+startButton.style.display = "none";
+redrawButton.style.display = "none";
+
 let currentCardIndex = 0;
 let currentCard;
 let timerInterval;
@@ -60,13 +63,15 @@ function flipCard() {
     cardStar.appendChild(star);
   }
 
+  startButton.style.display = "inline-block";
+
   redrawButton.style.display = [...stars].some((star) =>
     star.classList.contains("fullStar")
   )
     ? "block"
     : "none";
 
-  startButton.style.display = "block";
+  startButton.classList.add("active");
 
   instructions.textContent = "Click Start to begin the task.";
 
@@ -80,8 +85,14 @@ function useStarToRedraw() {
     star.classList.contains("fullStar")
   );
 
+  redrawButton.style.display = [...stars].some((star) =>
+    star.classList.contains("fullStar")
+  )
+    ? "inline-block"
+    : "none";
+
   if (fullStars.length > 0) {
-    redrawButton.style.display = "inline-block";
+    redrawButton.classList.add("active");
     fullStars[0].classList.remove("fullStar");
     fullStars[0].classList.add("emptyStar");
     currentCardIndex = Math.floor(Math.random() * cards.length);
@@ -167,3 +178,4 @@ function showYesNoDialog(text, yesCallback, noCallback) {
 
 deck.addEventListener("click", flipCard);
 startButton.addEventListener("click", startTimer);
+redrawButton.addEventListener("click", useStarToRedraw);
