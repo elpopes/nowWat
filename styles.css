@@ -33,6 +33,11 @@ h1 {
   gap: 1em;
 }
 
+.star {
+  font-size: 2em;
+  color: gold;
+}
+
 #starContainer {
   font-size: 6em; /* the size of the stars */
   display: flex;
@@ -77,7 +82,7 @@ h1 {
 
 .front {
   background-color: #ffffff;
-  font-size: larger;
+  font-size: x-large;
 }
 
 .back {
