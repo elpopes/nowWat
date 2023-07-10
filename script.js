@@ -49,11 +49,14 @@ function flipCard() {
     (timeDisplay) => (timeDisplay.textContent = currentCard.time)
   );
 
+  let cardStar = discardPile.querySelector(".cardStar");
+  cardStar.innerHTML = "";
+
   if (currentCard.star) {
     let star = document.createElement("div");
     star.className = "star";
     star.textContent = "☆";
-    discardPile.querySelector(".card-contents").appendChild(star);
+    cardStar.appendChild(star);
   }
 
   startButton.style.display = "block";
